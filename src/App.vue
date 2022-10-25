@@ -1,32 +1,36 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
-  </div>
+  <v-app id="inspire" v-if="$route.path !== '/login'">
+    <Header />
+    <Sidebar />
+    <v-main>
+      <v-container class="py-8 px-6" fluid>
+        <router-view></router-view>
+      </v-container>
+    </v-main>
+  </v-app>
+  <v-app v-else>
+    <login>
+    </login>
+  </v-app>
+
 </template>
+<script lang="ts">
+import Vue from 'vue';
+import Header from '@/components/header.vue'
+import Sidebar from '@/components/sidebar.vue'
+import login from '@/views/Authentification/login.vue'
+export default Vue.extend({ 
+  name: 'App',
+  components: { Sidebar, Header, login },  
+  
+  mounted: function () {
+    if (!localStorage.getItem('token'))
+      if (this.$route.path !== '/login')
+        this.$router.push('/login')
+  },
+  data: () => ({ 
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+  })
+});
+</script>

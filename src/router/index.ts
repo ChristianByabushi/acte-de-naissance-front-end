@@ -1,29 +1,63 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-
+import login from '../views/Authentification/login.vue'
 Vue.use(VueRouter)
-
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'dashboard',
+    component: () => import('@/views/Dashboard/index.vue')
+
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
-]
+    path: '/merchandise',
+    name: 'merchandise',
+    component: () => import('@/views/merchandise/menu_merchandise.vue')
+  },
+  {
+    path: '/invoice',
+    name: 'invoice',
+    component: () => import('@/views/invoices/invoice.vue')
 
+  },
+  {
+    path: '/analysis',
+    name: 'analysis',
+    component: () => import('@/views/analysis/analysis.vue')
+  },
+  {
+    path: '/account',
+    name: 'account',
+    component: () => import('@/views/Authentification/account.vue')
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: login
+  },
+]
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
+// router.beforeEach(async (to, from) => {
+//   if (
+//     // make sure the user is authenticated
+//      !localStorage.getItem('token') &&
+//     //  Avoid an infinite redirect
+//     to.name !== 'login'
+//   ) {
+//     // redirect the user to the login page
+//     return { name: '/login' } 
+//   }
+// })
+
+// router.beforeEach((to, from, next) => {
+//   if (to.name !== 'login' && !localStorage.getItem('token'))
+//     next('/login')
+// })
+
+
 
 export default router
