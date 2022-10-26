@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
+
 import login from '../views/Authentification/login.vue'
-Vue.use(VueRouter)
+Vue.use(VueRouter)  
+
+
 const routes: Array<RouteConfig> = [
   {
     path: '/',
@@ -40,7 +43,13 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+}) 
+
+
+
+
+
+
 // router.beforeEach(async (to, from) => {
 //   if (
 //     // make sure the user is authenticated
