@@ -118,7 +118,7 @@ export default {
 				const formData = new FormData()
 				formData.append("created_at", this.created_at)
 				formData.append("itemSelected", this.itemSelected)
-				const response = await axios.post('lineInvoice/getResultInvoices', formData)
+				const response = await axios.post('/lineInvoice/getResultInvoices', formData)
 				this.list_invoices = response.data[0]
 				this.resultatInvoices = response.data[1]
 			} catch (e) {
@@ -127,7 +127,7 @@ export default {
 		},
 		async get_stock_merchandise() {
 			try {
-				const response = await axios.post('merchandise/')
+				const response = await axios.post('/humanapp/public/merchandise/')
 				this.merchandises = response.data
 			} catch (e) {
 				alert(e)

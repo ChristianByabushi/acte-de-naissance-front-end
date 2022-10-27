@@ -66,7 +66,7 @@ export default {
   methods: {
     async getDashboardanalysis() {
       try {
-        const response = await axios.post('lineInvoice/dashboardanalysis/' + this.getDate())
+        const response = await axios.post('/lineInvoice/dashboardanalysis/' + this.getDate())
         var result = response.data
         this.specificResult = [
           { title: "Total de produits achétés", color: "#FD00FFFF", amounts: result.totalAmountby.totalAmountBought + ' Units' },
@@ -90,14 +90,6 @@ export default {
   created() {
     this.getDashboardanalysis()
     this.getDate()  }
-
-
-
-
-
-
-
-
 
 }
 </script>

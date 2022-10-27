@@ -60,7 +60,7 @@
 						</v-col>
 					</v-row>
 					<v-col cols="2">
-						<v-btn color="#ffff" @click="addNewMerchandise=!addNewMerchandise; get_merchandise()">
+						<v-btn color="#ffff" @click="addNewMerchandise = !addNewMerchandise; get_merchandise()">
 							<span v-if="addNewMerchandise">Liste des biens</span>
 							<span v-else>Ajouter bien</span>
 						</v-btn>
@@ -73,9 +73,9 @@
 								:items-per-page="5" class="elevation-1">
 								<template v-slot:item.actions="{ item }"
 									class="d-flex justify-space-between align-center">
-									<v-icon small color="purple" @click="{edit_merchandise_Item(item)}">mdi-pencil
+									<v-icon small color="purple" @click="{ edit_merchandise_Item(item) }">mdi-pencil
 									</v-icon>
-									<v-icon small color="red" @click="{deleteMerchandiseItem(item)}">
+									<v-icon small color="red" @click="{ deleteMerchandiseItem(item) }">
 										mdi-delete
 									</v-icon>
 								</template>
@@ -94,7 +94,6 @@ import new_stock from '@/views/merchandise/new_stock.vue'
 import edit_merchandise from '@/views/merchandise/edit_merchandise.vue'
 import edit_stock_item from '@/views/merchandise/edit_stock_item.vue'
 import axios from 'axios'
-
 export default {
 	name: "Dashboard",
 	components: {
@@ -144,9 +143,10 @@ export default {
 		],
 	}),
 	methods: {
+
 		async get_merchandise() {
 			try {
-				const response = await axios.post('merchandise/')
+				const response = await axios.post('humanapp/public/merchandise/')
 				this.merchandises = response.data
 			} catch (e) {
 				alert(e)
@@ -154,7 +154,7 @@ export default {
 		},
 		async get_stock_merchandise() {
 			try {
-				const response = await axios.post('stock_merchandise/')
+				const response = await axios.post('/humanapp/public/stock_merchandise/')
 				this.stock_merchandises = response.data
 			} catch (e) {
 				alert(e)
@@ -163,7 +163,7 @@ export default {
 		async deleteMerchandiseItem(info) {
 			try {
 				if (confirm("Voulez vous supprimer l'item " + info.id)) {
-					const response = await axios.post('merchandise/delete/' + info.id)
+					const response = await axios.post('/merchandise/delete/' + info.id)
 					this.get_merchandise()
 					alert("Suppression réussie")
 				}

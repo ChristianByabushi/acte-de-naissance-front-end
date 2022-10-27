@@ -166,7 +166,7 @@ export default {
 				formData.append('client_secret', this.password)
 				formData.append('password', this.password)
 				formData.append('grant_type', 'password')
-				const response = await axios.post('user/login', formData)
+				const response = await axios.post('/user/login', formData)
 				if (response.data['access_token']) {
 					localStorage.setItem('token', response.data['access_token'])
 					if (this.$route.path !== '/')
@@ -276,7 +276,7 @@ export default {
 				formData.append('new_email', this.email)
 				formData.append('email', this.userInfo.email)
 				formData.append('idUser', this.userInfo.id)
-				const response = await axios.post('user/editAccount', formData)
+				const response = await axios.post('/user/editAccount', formData)
 				this.typeAlert = 'primary'
 				this.msgAlert = 'Compte mise à jour avec succès'
 				if (this.$route.path !== '/login')

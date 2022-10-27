@@ -4,7 +4,6 @@ import VueRouter, { RouteConfig } from 'vue-router'
 import login from '../views/Authentification/login.vue'
 Vue.use(VueRouter)  
 
-
 const routes: Array<RouteConfig> = [
   {
     path: '/',

@@ -126,7 +126,6 @@ export default {
 				const response = await axios.post('lineInvoice/getInvoiceInfo/' + idlineinvoice.id_line)
 				this.listInvoicesPrint = response.data
 				this.printinlineinfo(idlineinvoice.id_line)
-				this.printLinePermit = !this.printLinePermit
 			} catch (e) {
 				console.log(e)
 			}
@@ -135,13 +134,13 @@ export default {
 			try {
 				const response = await axios.post('lineInvoice/getInlineInfo/' + id_line)
 				this.inlineInfo = response.data
-				console.log(this.inlineInfo)
+				console.log(this.inlineInfo) 
+				this.printLinePermit = !this.printLinePermit
 			} catch (e) {
 				console.log(e)
 			}
 		},
 		async printMethode() {
-
 			html2pdf(document.getElementById("element-to-convert"), {
 				margin: 5,
 				filename: "facture -" + this.inlineInfo.client + "-" + this.inlineInfo.created_at,
@@ -149,12 +148,13 @@ export default {
 					format: 'a6',
 					orientation: 'portrait'
 				},
-			});
+			}); 
+			this.printLinePermit = !this.printLinePermit
 		},
 		async deleteInvoiceInline(idlineinvoice) {
 			if (confirm("Voulez-vous supprimer cette facture de l'operation " + idlineinvoice.id_line + " ?")) {
 				try {
-					const response = await axios.post('lineInvoice/deleteInvoice/' + idlineinvoice.id_line)
+					const response = await axios.post('/lineInvoice/deleteInvoice/' + idlineinvoice.id_line)
 					this.listInvoices = response.data
 					this.get_listInlines()
 				} catch (e) {
@@ -165,7 +165,7 @@ export default {
 		},
 		async get_listInvoices() {
 			try {
-				const response = await axios.post('invoice/')
+				const response = await axios.post('/humanapp/public/invoice/')
 				this.listInvoices = response.data
 			} catch (e) {
 				console.log(e)
@@ -173,7 +173,7 @@ export default {
 		},
 		async get_listInlines() {
 			try {
-				const response = await axios.post('lineInvoice/')
+				const response = await axios.post('/humanapp/public/lineInvoice/')
 				this.listInlines = response.data
 			} catch (e) {
 				console.log(e)

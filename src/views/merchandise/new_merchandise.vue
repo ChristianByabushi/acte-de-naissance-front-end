@@ -12,15 +12,15 @@
 	</div>
 </template>
 <script>
-import axios from 'axios' 
+import axios from 'axios'  
 export default {
 	name: "new_merchandise",
 	data: () => ({
 		title: '',
 		description: '',
-		categorie : '',
-		items_categorie: ['Voitures','Matelas', 'Vetements','Autres'],
-	}), 
+		categorie: '',
+		items_categorie: ['Voitures', 'Matelas', 'Vetements', 'Autres'],
+	}),
 	methods: {
 		async submit_merchandise() {
 			try {
@@ -28,8 +28,8 @@ export default {
 				formData.append('title', this.title)
 				formData.append('description', this.description)
 				formData.append('categorie', this.categorie)
-				const response = await axios.post('merchandise/create', formData)
-				alert('Bien '+this.title+' ajouté avec succès')
+				const response = await axios.post('/merchandise/create', formData)
+				alert('Bien ' + this.title + ' ajouté avec succès')
 			} catch (e) {
 				alert(e)
 			}

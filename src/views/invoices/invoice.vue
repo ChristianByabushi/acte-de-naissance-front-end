@@ -16,7 +16,7 @@
 		<v-container>
 			<v-row>
 				<v-col cols="5" sm="3">
-					<v-select :items="stock_merchandises" @change="verifyAmount();seek_amount_and_price_stock()"
+					<v-select :items="stock_merchandises" @change="verifyAmount(); seek_amount_and_price_stock()"
 						item-text="title" v-model="id_stock" item-value="id_stock" label="Item">
 					</v-select>
 				</v-col>
@@ -29,16 +29,16 @@
 					</v-text-field>
 				</v-col>
 				<v-col cols="2" sm="4">
-					<v-alert color="blue-grey" dark> Prix total: {{Number(amount_sale*pu_sale).toFixed(4)}}
+					<v-alert color="blue-grey" dark> Prix total: {{ Number(amount_sale * pu_sale).toFixed(4) }}
 					</v-alert>
 				</v-col>
 				<v-col cols="12" sm="6" class="d-flex" v-if="pu_by">
-					<v-alert color="dense" type="info">Le pua de ce bien était de {{pu_by}} $ et il restait
-						{{amount_by}} unités </v-alert>
+					<v-alert color="dense" type="info">Le pua de ce bien était de {{ pu_by }} $ et il restait
+						{{ amount_by }} unités </v-alert>
 				</v-col>
 				<v-col cols="12" sm="6">
 					<v-btn @click="verifyAmount(); submitNewItemInvoice()" class="mb-1">
-						<span v-if="indexEdit!='add'">Editer</span>
+						<span v-if="indexEdit != 'add'">Editer</span>
 						<span v-else>Ajouter</span>
 					</v-btn>
 				</v-col>
@@ -70,13 +70,12 @@
 							</tr>
 						</thead>
 						<tbody>
-
 							<tr v-for="(item, index) in listOfitemInvoices" :key="item.id_stock">
 								<td>{{ item.id_stock }}</td>
 								<td>{{ item.title }}</td>
 								<td>{{ item.pu_sale }}</td>
 								<td>{{ item.amount_sale }}</td>
-								<td>{{ Number(item.pu_sale*item.amount_sale).toFixed(3) }}</td>
+								<td>{{ Number(item.pu_sale * item.amount_sale).toFixed(3) }}</td>
 								<td>
 									<v-icon small color="purple" @click="editItemInvoice(index)">mdi-pencil
 									</v-icon>
@@ -92,15 +91,15 @@
 					<v-col cols="12" sm="6">
 						<v-text-field v-model="client" type="text" label="Client" required>
 						</v-text-field>
-						<div v-if="getNumberInvoices()>0">
+						<div v-if="getNumberInvoices() > 0">
 							<v-text-field v-model="created_at" type="date" label="Date de Vente" value="created_at"
 								required>
-								{{created_at}}
+								{{ created_at }}
 							</v-text-field>
 							<v-text-field v-model="decrease" type="number" step="any" label="Reduction sur facture">
 							</v-text-field>
 							<v-alert color="indigo" dark v-if="listOfitemInvoices">
-								Prix total net à payer : {{getTotalPriceAmount()}}
+								Prix total net à payer : {{ getTotalPriceAmount() }}
 							</v-alert>
 						</div>
 					</v-col>
@@ -119,7 +118,7 @@
 </template> 
 <script>
 import axios from 'axios'
-import html2pdf from "html2pdf.js";
+
 import resultInvoice from "@/views/invoices/resultInvoice.vue"
 export default {
 	name: "Invoice",
@@ -246,10 +245,10 @@ export default {
 
 		async get_stock_merchandise() {
 			try {
-				const response = await axios.post('stock_merchandise/')
+				const response = await axios.post('/humanapp/public/stock_merchandise/')
 				this.stock_merchandises = response.data
 			} catch (e) {
-				alert(e)
+				console.log(e)
 			}
 		},
 		async verifyAmount() {
@@ -267,9 +266,9 @@ export default {
 					form.append('created_at', this.created_at + this.getCurrentTime())
 					form.append('listOfitemInvoices', this.created_at + this.listOfitemInvoices)
 					const response = await axios.post('lineInvoice/create', form)
-					this.lastIdLine = response.data 
+					this.lastIdLine = response.data
 					this.async_create_each_invoice()
-					alert("Facture enregistrée avec succès")
+					console.log("Facture enregistrée avec succès")
 
 				} catch (e) {
 					alert(e)
@@ -282,7 +281,7 @@ export default {
 			const formData = new FormData()
 			formData.append("listOfitemInvoices", JSON.stringify(this.listOfitemInvoices))
 			try {
-				const response = await axios.post('invoice/create', formData)
+				const response = await axios.post('/invoice/create', formData)
 				this.listOfitemInvoices = []
 				this.decrease = ''
 				this.client = ''
