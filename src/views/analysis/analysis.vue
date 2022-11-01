@@ -32,7 +32,7 @@
 							mdi-refresh
 						</v-icon>Actualiser
 					</v-btn>
-				</v-col>
+				</v-col>  
 			</v-row>
 
 			<div id="element-print-invoices">
