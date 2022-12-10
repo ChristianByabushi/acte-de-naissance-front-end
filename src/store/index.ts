@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
-
+//import axios from 'axios'
+import axiosClient from '../axios/axios'
+let axios = axiosClient
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -9,7 +10,7 @@ export default new Vuex.Store({
     userInfo: [],
     loggin: false,
     handleDrawer: false,
-    drawer: true
+    drawer: false
   },
   getters: {
     getDrawer(state) {
@@ -34,8 +35,8 @@ export default new Vuex.Store({
   actions: {
     async getInfoUser() {
       try {
-        const response = await axios.post('user/getInforAccount/' + localStorage.getItem('email'))
-        this.commit("setGetUserinfo", response.data)
+        const response = await axios.post('user/getInforAccount/' + localStorage.getItem('username'))
+        this.commit("setGetUserinfo", response.data) 
       } catch (e) {
         console.log(e)
       }

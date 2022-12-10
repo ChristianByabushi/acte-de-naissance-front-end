@@ -141,7 +141,6 @@ export default {
 			}
 		},
 		async printMethode() {
-
 			html2pdf(document.getElementById("element-to-convert"), {
 				margin: 5,
 				filename: "facture -" + this.inlineInfo.client + "-" + this.inlineInfo.created_at,

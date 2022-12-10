@@ -149,7 +149,7 @@ export default {
 				const response = await axios.post('merchandise/')
 				this.merchandises = response.data
 			} catch (e) {
-				alert(e)
+				 console.log(e)
 			}
 		},
 		async get_stock_merchandise() {
@@ -157,7 +157,7 @@ export default {
 				const response = await axios.post('stock_merchandise/')
 				this.stock_merchandises = response.data
 			} catch (e) {
-				alert(e)
+				console.log(e)
 			}
 		},
 		async deleteMerchandiseItem(info) {
@@ -168,7 +168,7 @@ export default {
 					alert("Suppression réussie")
 				}
 			} catch (e) {
-				alert("Il y a une erreur. Il est imposible de supprimer un bien présent en stock!")
+				alert("Il y a une erreur. Il est imposible de supprimer")
 			}
 		},
 		async deleteMerchandiseStockItem(info) {

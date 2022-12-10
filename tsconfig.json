@@ -34,7 +34,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "src/router/indexCopy.js", "src/router/indexCopy.js", "src/axios/axios.ts"  ],
   "exclude": [
     "node_modules"
   ]

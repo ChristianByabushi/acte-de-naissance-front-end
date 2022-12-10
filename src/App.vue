@@ -18,19 +18,10 @@
 import Vue from 'vue';
 import Header from '@/components/header.vue'
 import Sidebar from '@/components/sidebar.vue'
+import error from '@/components/notfound.vue'
 import login from '@/views/Authentification/login.vue'
-export default Vue.extend({ 
+export default Vue.extend({
   name: 'App',
-  components: { Sidebar, Header, login },  
-  
-  mounted: function () {
-    if (!localStorage.getItem('token'))
-      if (this.$route.path !== '/login')
-        this.$router.push('/login')
-  },
-  data: () => ({ 
-
-
-  })
-});
+  components: { Sidebar, Header, login, error },
+})
 </script>

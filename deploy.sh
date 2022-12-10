@@ -1,3 +1,4 @@
+#!/usr/bin/env sh
 set -e 
 npm run build 
 
@@ -7,6 +8,6 @@ git init
 
 git add -A 
 git commit -m 'New Deployment'
-git push -f git@github.com:ChristianByabushi/humanAtmProject.git : gh-pages
+git push -f git@github.com:ChristianByabushi/humanAtmProject.git master:gh-pages
 
 cd -

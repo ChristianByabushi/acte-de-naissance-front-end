@@ -16,11 +16,11 @@
             <v-card elevation="4" class="rounded-lg">
               <v-card-text class="d-flex justify-space-between align-center">
                 <div class="inline">
-                  <strong>{{item.title}}</strong>
+                  <strong>{{ item.title }}</strong>
                   <small> (2 dernières semaines)</small>
                 </div>
                 <v-avatar :color="item.color" size="60">
-                  <span class="">{{item.amounts}}</span>
+                  <span class="">{{ item.amounts }}</span>
                 </v-avatar>
               </v-card-text>
             </v-card>
@@ -35,10 +35,10 @@
               <span slot="opposite">item.title</span>
               <v-card class="elevation-2">
                 <v-card-title class="text-h5">
-                  {{item.categorie}}
+                  {{ item.categorie }}
                 </v-card-title>
                 <v-card-text>
-                  {{item.description}}
+                  {{ item.description }}
                 </v-card-text>
               </v-card>
             </v-timeline-item>
@@ -89,15 +89,7 @@ export default {
   },
   created() {
     this.getDashboardanalysis()
-    this.getDate()  }
-
-
-
-
-
-
-
-
-
+    this.getDate()
+  }
 }
 </script>

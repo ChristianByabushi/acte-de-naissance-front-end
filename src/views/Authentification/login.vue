@@ -1,20 +1,19 @@
 <template>
 	<v-app id="inspire">
 		<v-container fluid fill-height>
-			<v-layout align-center justify-center>
-				<v-flex xs12 sm8 md4>
+			<v-layout align-center justify-center fill-height class="ContainLogin">
+
+				<v-flex xs10 sm8 md6>
 					<v-card class="elevation-12">
 						<v-toolbar dark color="primary">
-							<v-toolbar-title align-center justify-center>HumanAtm</v-toolbar-title>
+							<v-toolbar-title align-center justify-center>BagiraActo</v-toolbar-title>
 						</v-toolbar>
-						<v-img id="logoHuman" src="@/assets/atmlogo.jpg"></v-img>
-
 						<v-card-text>
 							<v-form @submit.prevent="handleSubmit">
 								<div class="d-flex">
 									<v-icon>person</v-icon>
-									<v-text-field name="email" label="Login" required type="text" placeholder="email"
-										v-model="email">
+									<v-text-field name="username" label="Login" required type="text"
+										placeholder="username" v-model="username">
 									</v-text-field>
 								</div>
 								<div class="d-flex">
@@ -28,7 +27,7 @@
 								<alert v-if="msgAlert" :activeClass="classAlert" :msg="msgAlert"></alert>
 								<v-card-actions>
 									<v-spacer></v-spacer>
-									<v-btn type="submit" color="primary">Login</v-btn>
+									<v-btn type="submit" @click="verifyFieled()">Login</v-btn>
 								</v-card-actions>
 							</v-form>
 						</v-card-text>
@@ -51,7 +50,7 @@ export default {
 	data() {
 		return {
 			password: '',
-			email: '',
+			username: '',
 			msgAlert: null,
 			classAlert: '',
 			activePassWord: false,
@@ -61,34 +60,49 @@ export default {
 	props: {
 		source: String,
 	},
+
 	methods: {
-		async handleSubmit() {
+		verifyFieled() {
 			this.msgAlert = ''
-			if (this.password == '' || this.email == '') {
+			if (this.password == '' || this.username == '') {
 				this.msgAlert = "Veuillez d'abord remplir tous  les champs"
-				this.classAlert = "info"
-				return
+				this.classAlert = "danger"
 			}
+		},
+		async handleSubmit() {
 			try {
 				const formData = new FormData()
-				formData.append('client_id', this.email)
-				formData.append('username', this.email)
+				formData.append('client_id', this.username)
+				formData.append('username', this.username)
 				formData.append('client_secret', this.password)
 				formData.append('password', this.password)
 				formData.append('grant_type', 'password')
 				const response = await axios.post('user/login', formData)
+				console.log(response.data)
 				if (response.data['access_token']) {
 					localStorage.setItem('token', response.data['access_token'])
-					localStorage.setItem('email', this.email)
-					if (this.$route.path !== '/')
-						this.$router.push('/')
+					localStorage.setItem('username', this.username)
+
+					if (response.data['scope'] === "admin") {
+						this.$router.push('/admin')
+					}
+					if (response.data['scope'] === "agent") {
+						this.$router.push('/agent')
+					}
+					if (response.data['scope'] === "receptionniste") {
+						this.$router.push('/welcome')
+					}
+					if (response.data['scope'] === "decl") {
+						this.$router.push('/welcome')
+					}
+
 				} else {
 					this.msgAlert = "Mot de passe ou email incorrect"
-					this.classAlert = "error"
+					this.classAlert = "danger"
 				}
 			} catch (e) {
 				this.msgAlert = "Mot de passe ou email incorrect"
-				this.classAlert = "error"
+				this.classAlert = "danger"
 			}
 		},
 		method_activePassWord() {
@@ -108,15 +122,5 @@ export default {
 	width: 20px;
 	padding-bottom: 10px;
 	cursor: pointer;
-}
-
-
-#logoHuman {
-	position: absolute;
-	height: 120px;
-	width: 220px;
-	margin-left: 5rem;
-	margin-top: 2rem;
-	opacity: 0.2;
 }
 </style>

@@ -3,6 +3,5 @@ module.exports = defineConfig({
   transpileDependencies: [
     'vuetify' 
   ], 
-
-  publicPath : '/humanAtmProject/'
+  publicPath: process.env.NODE_ENV === "production" ? "/admin/" : "/",
 })
