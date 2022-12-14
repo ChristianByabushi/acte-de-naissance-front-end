@@ -3,6 +3,17 @@
 		<h2 class="mb-4">Visualisation de l'acte de naissance</h2>
 		<form @submit.prevent="editMethod()" method="post">
 			<div class="mb p-2" id="actePrint">
+				<div>
+					<h5>REPUBLIQUE DEMOCRATIQUE DU CONGO</h5>
+					<h5>Province du SUD-KIVU</h5>
+					<h5>Ville de BUKAVU</h5>
+					<h5>District de............... </h5>
+					<h5>Territoire /commune de..........</h5>
+					<h5>Chefferie /Secteur ou cité de............</h5>
+					<h5>Bureau Principal de l'Etat civil de BAGIRA</h5>
+					<h5>Acte n°{{ idActe }} Volume {{ idDeclarant }} Folio n°{{ getDateFormat.day }} </h5>
+				</div>
+				<img id="rdcLogo" src="@/assets/rdcLogo.png" alt="">
 				<h2 class="titre">Acte Naissance</h2>
 				<div class="fill">
 					<img id="logoActe" src="@/assets/logosidebar.png" alt="error" />
@@ -35,7 +46,9 @@
 					<h4> est né <span class="infoActe">{{ nom }} {{ postnom }} {{ prenom }}</span> fils (fille) de {{
 							nomPere
 					}} né à
-						{{ bornin }} le {{ dateString }} Nationalité {{ nationalite }}</h4>
+						<span class="infoActe">{{ lieuNaissance }}</span> le {{ dateString }} Nationalité {{ nationalite
+						}}
+					</h4>
 					<h4>Profession <span class="infoActe">{{ professsion }}</span> Résident à {{ residence }}</h4>
 					<h4>Lecture de l'acte a été faite ou connaissance de a été donnée ou</h4>
 					<h4>traduction de l'acte a été faite en Français typique que nous </h4>
@@ -266,6 +279,15 @@ h5 {
 	color: rgb(65, 65, 190)
 }
 
+#rdcLogo {
+	top: 82px;
+	left: 510px;
+	width: 140px; 
+	width: 140px; 
+	opacity: 0.5; 
+	position: absolute;
+}
+
 
 .fill {
 	overflow: hidden;
@@ -277,17 +299,24 @@ h5 {
 	flex-shrink: 0;
 	opacity: 0.2;
 	position: absolute;
-	top: 115px;
-	left: 5%;
+	top: 80px;
+	left: 4%;
 }
 
 @media screen and (min-width:1500px) {
 	.fill {
-		top: 90px;
-		left: 24px;
+		top: 100px;
+		left: 40px;
 		width: auto;
 		opacity: 0.2;
 	}
+	#rdcLogo {
+	top: 137px;
+	left: 100px;
+	width: 140px; 
+	opacity: 0.5; 
+	position: absolute;
+}
 
 }
 </style>
