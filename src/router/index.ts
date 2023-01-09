@@ -24,7 +24,7 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: 'handlecount',
-    name: 'accounts',
+    name: 'listusers',
     component: handlecount,
     children: [
       {
@@ -64,7 +64,7 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: 'indexacte',
-    name: 'indexacte',
+    name: 'listeacte',
     props: true,
     component: indexacte,
     children: [
@@ -172,17 +172,15 @@ const routes: Array<RouteConfig> = [
       },
       {
         path: 'listemessage',
-        name: 'listemessage',
+        name: 'indexMsg',
         component: () => import('../views/messages/listemessage.vue'),
         props: true,
       },
     ]
   },
-
-
 ]
 const router = new VueRouter({
-  //  mode: 'history',
+  mode: 'history',
   base: process.env.BASE_URL,
   routes
 })

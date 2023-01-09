@@ -26,7 +26,7 @@ export default {
 	data() {
 		return {
 			menus: [
-				{ title: "Liste des messages", icon: 'mdi-account', link: "listemessage" },
+				{ title: "Liste des messages", icon: 'mdi-account', link: "indexMsg" },
 				{ title: "Ecrire nouveau", icon: "mdi-delete", link: "newmessage" },
 				{ title: "Visualiser", icon: "mdi-delete", link: "showmessage" },
 			],

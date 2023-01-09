@@ -1,6 +1,5 @@
 <template>
 	<div>
-
 		<v-alert dense type="info" color="#757575">
 			Cette partie du programme porte les fonctionnalités sur l'administrateur du système
 		</v-alert>

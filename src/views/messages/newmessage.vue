@@ -3,14 +3,20 @@
 		<v-subheader>
 			<h3>Nouveau message</h3>
 		</v-subheader>
-		<v-card>
-			<h6>Expéditeur : {{ userInfo.email }}</h6>
-		</v-card>
+
 		<form @submit.prevent="envoyerMessage()" method="post">
+
 			<v-card>
-				<v-card-title class="text-h5">
-					<v-text-field v-model="receiverEmail" label="email Destinaire" width="50%"></v-text-field>
+				<v-card-title>
+					Expéditeur : {{ userInfo.email }}
 				</v-card-title>
+				<v-row>
+					<v-col cols="6">
+						<v-card-title class="text-h5">
+							<v-text-field v-model="receiverEmail" label="email Destinaire" width="50%"></v-text-field>
+						</v-card-title>
+					</v-col>
+				</v-row>
 				<v-card-text>
 					<v-text-field v-model="msg" label="Contenu" required :counter="255"> </v-text-field>
 				</v-card-text>

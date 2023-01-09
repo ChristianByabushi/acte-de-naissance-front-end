@@ -84,7 +84,6 @@ export default {
   },
   beforeMount(){
     this.getDashboardanalysis() 
-  
   }
 }
 
