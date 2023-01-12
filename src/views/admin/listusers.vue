@@ -48,13 +48,10 @@ export default {
 		scope: "decl",
 		items_scope: [
 			{
-				scope: 'agent',
-				title: 'Agent'
+				scope: 'nutritionniste',
+				title: 'Nutritionniste'
 			},
-			{
-				scope: 'decl',
-				title: 'Déclarant'
-			},
+			
 			{
 				scope: 'receptionniste',
 				title: 'Réceptionniste'
@@ -66,10 +63,11 @@ export default {
 		async get_users() {
 			let id = String(this.scope)
 			if (id == null)
-				id = "decl"
+				id = "receptionniste"
 			try {
 				const response = await axios.post("user/getAllUsers/" + id)
-				this.header_usersData = response.data
+				this.header_usersData = response.data 
+				console(response.data)
 			} catch (e) {
 				console.log(e)
 			}

@@ -1,10 +1,10 @@
 <template>
   <div>
     <v-subheader class="d-flex justify-space-between align-center">
-      <h3>Suivi des actes</h3>
+      <h3>Suivi des enfants mal-nouris</h3>
     </v-subheader>
     <v-alert dense type="info" color="#757575">
-      Cette partie contient toutes fonctions sur les statistiques des actes dans la commune de bagira
+      Cette partie contient toutes fonctions sur les statistiques des enfants dans la ville de goma
     </v-alert>
 
 
@@ -14,21 +14,7 @@
           Connexion réussie avec succès <strong>Bon travail</strong> !
         </v-alert>
 
-        <v-row>
-          <v-col v-for="(item, index) in specificResult" :key="index">
-            <v-card elevation="4" class="rounded-lg">
-              <v-card-text class="d-flex justify-space-between align-center">
-                <div class="inline">
-                  <strong>{{ item.title }}</strong>
-                  <small> ({{ item.timer }})</small>
-                </div>
-                <v-avatar :color="item.color" size="60">
-                  <span class="">{{ item.amounts }}</span>
-                </v-avatar>
-              </v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
+        
       </v-col>
       <v-col lg="6" cols="12">
         <v-card>
@@ -83,7 +69,8 @@ export default {
     }
   },
   beforeMount(){
-    this.getDashboardanalysis() 
+  //  this.getDashboardanalysis() 
+  
   }
 }
 

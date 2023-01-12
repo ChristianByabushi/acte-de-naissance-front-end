@@ -1,21 +1,26 @@
 <template>
 	<div>
-		<h5>Ajouter un compte</h5>
-		<form @submit.prevent="addMethod()" method="post">
-			<v-text-field v-model="firstname" label="Nom" required :counter="255"> </v-text-field>
-			<v-text-field v-model="lastname" label="Prénom" required :counter="255"> </v-text-field>
-			<v-text-field v-model="email" label="Adresse email" required :counter="255"> </v-text-field>
-			<v-text-field v-model="password" label="Mot de passe par defaut" required :counter="255"> </v-text-field>
-			<v-select name="" v-model="scope" :items="items_scope" item-text="title" label="Type d'utilisateur"
-				item-value="scope">
-			</v-select>
-			<v-alert :type="typeAlert" v-if="msgAlert" class="mb-4">
-				{{ msgAlert }}
-			</v-alert>
-			<v-btn type="submit" class="mr-4 center">
-				Ajouter
-			</v-btn>
-		</form>
+		<v-row class="center">
+				<h5>Ajouter un compte</h5>
+				<form @submit.prevent="addMethod()" method="post">
+					<v-text-field v-model="firstname" label="Nom" required :counter="255"> </v-text-field>
+					<v-text-field v-model="lastname" label="Prénom" required :counter="255"> </v-text-field>
+					<v-text-field v-model="email" label="Adresse email" required :counter="255"> </v-text-field>
+					<v-text-field v-model="password" label="Mot de passe par defaut" required :counter="255">
+					</v-text-field>
+					<v-select name="" v-model="scope" :items="items_scope" item-text="title" label="Type d'utilisateur"
+						item-value="scope">
+					</v-select>
+					<v-alert :type="typeAlert" v-if="msgAlert" class="mb-4">
+						{{ msgAlert }}
+					</v-alert>
+					<v-btn type="submit" class="mr-4 center">
+						Ajouter
+					</v-btn>
+				</form>
+		</v-row>
+
+
 	</div>
 </template>
 <script>
@@ -32,12 +37,8 @@ export default {
 		msgAlert: '',
 		items_scope: [
 			{
-				scope: 'agent',
-				title: 'Agent'
-			},
-			{
-				scope: 'decl',
-				title: 'Déclarant'
+				scope: 'nutritionniste',
+				title: 'Nutritionniste'
 			},
 			{
 				scope: 'receptionniste',
@@ -82,6 +83,7 @@ export default {
 				this.typeAlert = 'info'
 
 			} catch (e) {
+
 			}
 		}
 	},

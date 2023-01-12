@@ -2,11 +2,10 @@
 	<v-app id="inspire">
 		<v-container fluid fill-height>
 			<v-layout align-center justify-center fill-height class="ContainLogin">
-
 				<v-flex xs10 sm8 md6>
 					<v-card class="elevation-12">
-						<v-toolbar dark color="primary">
-							<v-toolbar-title align-center justify-center>BagiraActo</v-toolbar-title>
+						<v-toolbar dark >
+							<v-toolbar-title align-center justify-center>BCZ GOMA</v-toolbar-title>
 						</v-toolbar>
 						<v-card-text>
 							<v-form @submit.prevent="handleSubmit">
@@ -85,17 +84,16 @@ export default {
 
 					if (response.data['scope'] === "admin") {
 						this.$router.push('/admin')
-					}
-					if (response.data['scope'] === "agent") {
-						this.$router.push('/agent')
-					}
-					if (response.data['scope'] === "receptionniste") {
-						this.$router.push('/welcome')
-					}
-					if (response.data['scope'] === "decl") {
-						this.$router.push('/welcome')
-					}
+					} 
 
+					if (response.data['scope'] === "nutritionniste") {
+						this.$router.push('/nutritionniste')
+					}
+					
+					if (response.data['scope'] === "receptionniste") {
+						this.$router.push('/receptionniste')
+					}
+			
 				} else {
 					this.msgAlert = "Mot de passe ou email incorrect"
 					this.classAlert = "danger"

@@ -10,9 +10,7 @@
 			<v-select name="" v-model="scope" :items="items_scope" item-text="title" label="Type d'utilisateur"
 				item-value="scope">
 			</v-select>
-			<v-select v-model="stateaccount" :items="items_stateaccount" item-text="title" label="Etat du compte"
-				item-value="state">
-			</v-select>
+			
 			<v-alert :type="typeAlert" v-if="msgAlert" class="mb-4">
 				{{ msgAlert }}
 			</v-alert>
@@ -49,12 +47,12 @@ export default {
 		],
 		items_scope: [
 			{
-				scope: 'agent',
-				title: 'Agent'
+				scope: 'nutritionniste',
+				title: 'Nutritionniste'
 			},
 			{
-				scope: 'decl',
-				title: 'Déclarant'
+				scope: 'receptionniste',
+				title: 'Réceptionniste'
 			},
 		]
 	}),
@@ -86,7 +84,6 @@ export default {
 				formData.append('email', this.email)
 				formData.append('new_email', this.email)
 				formData.append('scope', this.scope)
-				formData.append('stateaccount', this.stateaccount)
 				const response = await axios.post('user/editAccountUser', formData)
 				if ((response.data.errorstate) == true) {
 					this.typeAlert = 'error'

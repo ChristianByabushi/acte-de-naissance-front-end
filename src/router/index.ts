@@ -24,7 +24,7 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: 'handlecount',
-    name: 'listusers',
+    name: 'accounts',
     component: handlecount,
     children: [
       {
@@ -64,7 +64,7 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: 'indexacte',
-    name: 'listeacte',
+    name: 'indexacte',
     props: true,
     component: indexacte,
     children: [
@@ -124,6 +124,58 @@ const routes: Array<RouteConfig> = [
       }
     ]
   },
+
+  {
+    path: 'index-enfant',
+    name: 'indexenfant',
+    component: () => import('../views/enfant/index-enfant.vue'),
+    children: [
+      {
+        path: 'edit-enfant/:id',
+        name: 'editenfant',
+        component: () => import('../views/enfant/edit-enfant.vue'),
+        props: true,
+      }, 
+      {
+        path: 'new-enfant',
+        name: 'newenfant',
+        component: () => import('../views/enfant/new-enfant.vue'),
+        props: true,
+      },
+      {
+        path : 'list-enfant',
+        name :'indexenfant', 
+        component: () => import('../views/enfant/liste-enfant.vue'),
+        props : true
+      }
+    ]
+  },
+
+  {
+    path: 'index-nutrition',
+    name: 'indexnutrition',
+    component: () => import('../views/nutrition/index-nutrition.vue'),
+    children: [
+      {
+        path: 'edit-nutrition/:id',
+        name: 'editnutrition',
+        component: () => import('../views/nutrition/edit-nutrition.vue'),
+        props: true,
+      }, 
+      {
+        path: 'new-nutrition',
+        name: 'newnutrition',
+        component: () => import('../views/nutrition/new-nutrition.vue'),
+        props: true,
+      },
+      {
+        path : 'list-nutrition',
+        name :'indexnutrition', 
+        component: () => import('../views/nutrition/liste-nutrition.vue'),
+        props : true
+      }
+    ]
+  },
   {
     path: 'externaldeclarant',
     name: "externaldeclarant",
@@ -169,7 +221,7 @@ const routes: Array<RouteConfig> = [
         name: 'newmessage',
         component: () => import('../views/messages/newmessage.vue'),
         props: true,
-      },
+      }, 
       {
         path: 'listemessage',
         name: 'indexMsg',
@@ -178,9 +230,11 @@ const routes: Array<RouteConfig> = [
       },
     ]
   },
+
+
 ]
 const router = new VueRouter({
-  mode: 'history',
+  //  mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
