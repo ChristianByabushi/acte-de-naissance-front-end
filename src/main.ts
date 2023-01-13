@@ -10,7 +10,7 @@ import '@fortawesome/free-solid-svg-icons'
 import 'vue-material'
 import 'material-icons/iconfont/material-icons.css';
 Vue.config.productionTip = false 
-axios.defaults.baseURL = 'http://localhost/bcz/public/'
+axios.defaults.baseURL = 'http://localhost/hospital/public/'
 axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem('token')
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 

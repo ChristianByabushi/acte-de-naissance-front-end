@@ -1,12 +1,11 @@
 <template>
   <div>
     <v-subheader class="d-flex justify-space-between align-center">
-      <h3>Suivi des enfants mal-nouris</h3>
+      <h3>Gestion de l'hopital</h3>
     </v-subheader>
     <v-alert dense type="info" color="#757575">
-      Cette partie contient toutes fonctions sur les statistiques des enfants dans la ville de goma
+      Cette partie contient toutes fonctions sur les statistiques des malades dans la ville de goma
     </v-alert>
-
 
     <v-row>
       <v-col lg="6" cols="12">
@@ -48,19 +47,6 @@ export default {
         console.log(error)
       }
     },
-    async getDashboardanalysis() {
-      try {
-        const response = await axios.post('resultController/countActesWeeks/' + this.getDate())
-        let result = response.data
-        this.specificResult = [
-          { title: "Total des déclarants", timer: 'Sommation', color: "indigo", amounts: result.totaldeclarant.numberDeclarant },
-          { title: "Total acte de naissance", timer: '2 dernières semaines', color: '#5F9FFFFF', amounts: result.totalactenaissance.numberActe },
-        ]
-        this.DetailsItems = result.DetailsItems
-      } catch (e) {
-        console.log(e)
-      }
-    },
     getDate() {
       var twoWeeks = 1000 * 60 * 60 * 24 * 14;
       var twoWeeksTime = new Date(new Date().getTime() - twoWeeks);
@@ -69,7 +55,6 @@ export default {
     }
   },
   beforeMount(){
-  //  this.getDashboardanalysis() 
   
   }
 }

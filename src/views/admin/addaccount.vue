@@ -37,12 +37,17 @@ export default {
 		msgAlert: '',
 		items_scope: [
 			{
-				scope: 'nutritionniste',
-				title: 'Nutritionniste'
+				scope: 'pharmacien',
+				title: 'Pharmacien'
 			},
+			
 			{
 				scope: 'receptionniste',
 				title: 'Réceptionniste'
+			},
+			{
+				scope: 'medecin',
+				title: 'Medecin'
 			},
 		]
 	}),

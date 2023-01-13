@@ -3,17 +3,15 @@
 		<v-subheader>
 			<h3>Nouveau message</h3>
 		</v-subheader>
-		<v-card>
-			<h6>Expéditeur : {{ userInfo.email }}</h6>
-		</v-card>
 		<form @submit.prevent="envoyerMessage()" method="post">
 			<v-card>
+				<h6 class="pt-2 pl-3">Expéditeur : {{ userInfo.email }}</h6>
+
 				<v-card-title class="text-h5">
 					<v-text-field v-model="receiverEmail" label="email Destinaire" width="50%"></v-text-field>
 				</v-card-title>
-				<v-card-text>
-					<v-text-field v-model="msg" label="Contenu" required :counter="255"> </v-text-field>
-				</v-card-text>
+				<textarea v-model="msg" placeholder="ecrire le message" width="90" id="textAreaMessage" cols="10"
+					rows="5"></textarea>
 				<v-alert :type="typeAlert" v-if="msgAlert" class="mb-4">
 					{{ msgAlert }}
 				</v-alert>
@@ -83,5 +81,15 @@ export default {
 }
 </script>
 <style>
-
+#textAreaMessage {
+	border-radius: 2px;
+	margin-left: 15px;
+	margin-right: 5px;
+	width: 94%;
+	box-sizing: border-box;
+	border: 2px solid rgb(249, 244, 244);
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	outline: none;
+}
 </style>

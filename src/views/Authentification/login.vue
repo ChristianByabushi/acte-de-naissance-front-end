@@ -5,7 +5,7 @@
 				<v-flex xs10 sm8 md6>
 					<v-card class="elevation-12">
 						<v-toolbar dark >
-							<v-toolbar-title align-center justify-center>BCZ GOMA</v-toolbar-title>
+							<v-toolbar-title align-center justify-center>HPGR GOMA</v-toolbar-title>
 						</v-toolbar>
 						<v-card-text>
 							<v-form @submit.prevent="handleSubmit">

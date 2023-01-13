@@ -1,6 +1,6 @@
 import axios from 'axios';
 const axiosClient = axios.create({
-	baseURL: 'http://localhost/bcz/public/'
+	baseURL: 'http://localhost/hospital/public/'
 })
 
 axiosClient.interceptors.request.use(config => {

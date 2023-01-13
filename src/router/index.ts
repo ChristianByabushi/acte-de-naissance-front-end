@@ -3,7 +3,6 @@ import VueRouter, { RouteConfig } from 'vue-router'
 //moduleadmin
 import mainAdmin from '../views/admin/index.vue'
 import handlecount from '../views/admin/account.vue'
-import indexacte from '../views/admin/indexacte.vue'
 import login from '../views/Authentification/login.vue'
 Vue.use(VueRouter)
 const routes: Array<RouteConfig> = [
@@ -62,68 +61,14 @@ const routes: Array<RouteConfig> = [
     name: 'notfound',
     component: () => import('@/components/notfound.vue')
   },
-  {
-    path: 'indexacte',
-    name: 'indexacte',
-    props: true,
-    component: indexacte,
-    children: [
-      {
-        path: 'listeacte',
-        name: 'listeacte',
-        component: () => import('../views/admin/listeacte.vue'),
-        props: true
-      },
-      {
-        path: 'showacte/:id',
-        name: 'showacte',
-        component: () => import('../views/admin/showacte.vue'),
-        props: true,
-      },
-    ]
-  },
+  
   {
     path: 'infoadmin',
     name: 'infoadmin',
     component: () => import('../views/admin/accountAdmin.vue')
   },
 
-  {
-    path: 'indexacteborning',
-    name: 'indexacteborning',
-    component: () => import('../views/acte/indexActe.vue'),
-    children: [
-      {
-        path: 'edit/:id',
-        name: 'editActe',
-        component: () => import('../views/acte/editActe.vue'),
-        props: true,
-      },
-      {
-        path: 'newActe',
-        name: 'newActe',
-        component: () => import('../views/acte/newActe.vue'),
-        props: true,
-      },
-      {
-        path: 'listeActe',
-        name: 'listeActe',
-        component: () => import('../views/acte/listeActe.vue'),
-        props: true,
-      },
-      {
-        path: 'visualize/:id',
-        name: 'visualize',
-        component: () => import('../views/acte/showandprint.vue'),
-        props: true,
-      },
-      {
-        path: 'printActe/:id',
-        name: 'printActe',
-        component: () => import('../views/acte/printActe.vue'),
-      }
-    ]
-  },
+  
 
   {
     path: 'index-enfant',
@@ -150,61 +95,33 @@ const routes: Array<RouteConfig> = [
       }
     ]
   },
-
   {
-    path: 'index-nutrition',
-    name: 'indexnutrition',
-    component: () => import('../views/nutrition/index-nutrition.vue'),
+    path: 'index-malade',
+    name: 'indexmalade',
+    component: () => import('../views/malade/index-malade.vue'),
     children: [
       {
-        path: 'edit-nutrition/:id',
-        name: 'editnutrition',
-        component: () => import('../views/nutrition/edit-nutrition.vue'),
+        path: 'edit-malade/:id',
+        name: 'editmalade',
+        component: () => import('../views/malade/edit-malade.vue'),
         props: true,
       }, 
       {
-        path: 'new-nutrition',
-        name: 'newnutrition',
-        component: () => import('../views/nutrition/new-nutrition.vue'),
+        path: 'new-malade',
+        name: 'newmalade',
+        component: () => import('../views/malade/new-malade.vue'),
         props: true,
       },
       {
-        path : 'list-nutrition',
-        name :'indexnutrition', 
-        component: () => import('../views/nutrition/liste-nutrition.vue'),
+        path : 'list-malade',
+        name :'indexmalade', 
+        component: () => import('../views/malade/liste-malade.vue'),
         props : true
       }
     ]
   },
-  {
-    path: 'externaldeclarant',
-    name: "externaldeclarant",
-    component: () => import('../views/declarant/externaldeclarant.vue')
-  },
 
-  {
-    path: 'indexdeclarant',
-    name: 'indexdeclarant',
-    component: () => import('../views/declarant/index.vue'),
-    children: [
-      {
-        path: 'edit/:idDecl',
-        name: 'editclarant',
-        component: () => import('../views/declarant/edit.vue'),
-      },
-      {
-        path: 'newdeclarant',
-        name: 'newdeclarant',
-        component: () => import('../views/declarant/new.vue'),
-      },
-      {
-        path: 'listedeclarant',
-        name: 'listedeclarant',
-        component: () => import('../views/declarant/liste.vue'),
-        props: true,
-      },
-    ]
-  },
+
   {
     path: 'indexMsg',
     name: 'indexMsg',
