@@ -1,2 +1,66 @@
 User-agent: *
 Disallow:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE OR REPLACE TYPE BODY CercleType AS 
+ OVERRIDING MEMBER FUNCTION getAire RETURN FLOAT IS
+ BEGIN
+ RETURN (3.14159 * SELF.rayon * SELF.rayon);
+ END;
+ OVERRIDING MEMBER FUNCTION imprimer RETURN VARCHAR2 IS
+ BEGIN
+ RETURN (SELF AS FormeType).imprimer || ', rayon:' || SELF.rayon;
+ END;
+END;
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
