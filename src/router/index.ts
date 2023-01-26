@@ -126,26 +126,77 @@ const routes: Array<RouteConfig> = [
   },
 
   {
-    path: 'index-enfant',
-    name: 'indexenfant',
-    component: () => import('../views/enfant/index-enfant.vue'),
+    path: 'index-fonction',
+    name: 'indexfonction',
+    component: () => import('../views/fonction/index-fonction.vue'),
     children: [
       {
-        path: 'edit-enfant/:id',
-        name: 'editenfant',
-        component: () => import('../views/enfant/edit-enfant.vue'),
+        path: 'edit-fonction/:id',
+        name: 'editfonction',
+        component: () => import('../views/fonction/edit-fonction.vue'), 
         props: true,
       }, 
       {
-        path: 'new-enfant',
-        name: 'newenfant',
-        component: () => import('../views/enfant/new-enfant.vue'),
+        path: 'new-fonction',
+        name: 'newfonction',
+        component: () => import('../views/fonction/new-fonction.vue'),
         props: true,
       },
       {
-        path : 'list-enfant',
-        name :'indexenfant', 
-        component: () => import('../views/enfant/liste-enfant.vue'),
+        path : 'list-fonction',
+        name :'indexfonction', 
+        component: () => import('../views/fonction/liste-fonction.vue'),
+        props : true
+      }
+    ]
+  },
+
+  {
+    path: 'index-dette',
+    name: 'indexdette',
+    component: () => import('../views/dette/index-dette.vue'),
+    children: [
+      {
+        path: 'edit-dette/:id',
+        name: 'editdette',
+        component: () => import('../views/dette/edit-dette.vue'), 
+        props: true,
+      }, 
+      {
+        path: 'new-dette',
+        name: 'newdette',
+        component: () => import('../views/dette/new-dette.vue'),
+        props: true,
+      },
+      {
+        path : 'list-dette',
+        name :'indexdette', 
+        component: () => import('../views/dette/liste-dette.vue'),
+        props : true
+      }
+    ]
+  },
+  {
+    path: 'index-absence',
+    name: 'indexabsence',
+    component: () => import('../views/absence/index-absence.vue'),
+    children: [
+      {
+        path: 'edit-absence/:id',
+        name: 'editabsence',
+        component: () => import('../views/absence/edit-absence.vue'), 
+        props: true,
+      }, 
+      {
+        path: 'new-absence',
+        name: 'newabsence',
+        component: () => import('../views/absence/new-absence.vue'),
+        props: true,
+      },
+      {
+        path : 'list-absence',
+        name :'indexabsence', 
+        component: () => import('../views/absence/liste-absence.vue'),
         props : true
       }
     ]

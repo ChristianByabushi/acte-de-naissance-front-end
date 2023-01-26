@@ -1,26 +1,20 @@
 <template>
   <div>
     <v-subheader class="d-flex justify-space-between align-center">
-      <h3>Suivi des enfants mal-nouris</h3>
+      <h3>Suivi des absences</h3>
     </v-subheader>
     <v-alert dense type="info" color="#757575">
-      Cette partie contient toutes fonctions sur les statistiques des enfants dans la ville de goma
+      Vérifier la recente frequence des agents
     </v-alert>
 
 
     <v-row>
       <v-col lg="6" cols="12">
         <v-alert dense type="success" color="#0091EA">
-          Connexion réussie avec succès <strong>Bon travail</strong> !
+           L'hotel Kamanunga vous souhaite une bonne <strong>Concentration</strong>!
         </v-alert>
-
-        
       </v-col>
-      <v-col lg="6" cols="12">
-        <v-card>
-          <msg></msg>
-        </v-card>
-      </v-col>
+  
     </v-row>
   </div>
 </template>

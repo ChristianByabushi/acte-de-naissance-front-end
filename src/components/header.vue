@@ -1,14 +1,11 @@
 
 <template>
-	<v-app-bar absolute app elevation="4" color="#EEEEEE">
+	<v-app-bar absolute app elevation="4" color="grey lighten-2">
 		<v-app-bar-nav-icon @click="handDrawer()"></v-app-bar-nav-icon>
-		<v-toolbar-title dense>BCZ GOMA</v-toolbar-title>
+		<v-toolbar-title >Kamanuga Hotel</v-toolbar-title>
 		<v-col lg="6" cols="5">
 			<v-spacer></v-spacer>
-			<v-form class="ml-14 mt-8">
-				<v-text-field rounded outlined placeholder="Rechercher ici" append-icon="mdi-magnify" dense>
-				</v-text-field>
-			</v-form>
+			
 		</v-col>
 		<v-spacer></v-spacer>
 		<v-menu offset-y>

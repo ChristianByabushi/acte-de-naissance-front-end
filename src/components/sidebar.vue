@@ -1,53 +1,21 @@
 <template>
 	<v-navigation-drawer :value="getDrawer" app>
-		<v-img max-height="82" max-width="150" src="@/assets/logo.png" class="ml-7">
+		<v-img max-height="120" max-width="240" src="@/assets/logo.png" class="ml-2 mt-1">
 		</v-img>
 		<v-divider></v-divider>
-		<div>
+		<div color="dense">
 			<div v-if="userInfo.scope == 'admin'">
 				<v-list v-for="[icon, text, color, link] in linksAdmin" :key="icon" link>
 					<v-list-item :to="{ name: link }">
 						<v-list-item-icon>
 							<v-icon :color="color">{{ icon }}</v-icon>
 						</v-list-item-icon>
-
 						<v-list-item-content @click="link == '/login' ? logout() : donothing()">
 							<v-list-item-title :color="color">{{ text }}</v-list-item-title>
 						</v-list-item-content>
 					</v-list-item>
 				</v-list>
 			</div>
-
-			<div v-if="userInfo.scope == 'nutritionniste'">
-				<v-list v-for="[icon, text, color, link] in linksNutritionniste" :key="icon" link>
-					<v-list-item :to="{ name: link }">
-						<v-list-item-icon>
-							<v-icon :color="color">{{ icon }}</v-icon>
-						</v-list-item-icon>
-
-						<v-list-item-content @click="link == '/login' ? logout() : donothing()">
-							<v-list-item-title :color="color">{{ text }}</v-list-item-title>
-						</v-list-item-content>
-
-					</v-list-item>
-				</v-list>
-			</div>
-
-			<div v-if="userInfo.scope == 'receptionniste'">
-				<v-list v-for="[icon, text, color, link] in linksReceptioniste" :key="icon" link>
-					<v-list-item :to="{ name: link }">
-						<v-list-item-icon>
-							<v-icon :color="color">{{ icon }}</v-icon>
-						</v-list-item-icon>
-
-						<v-list-item-content @click="link == '/login' ? logout() : donothing()">
-							<v-list-item-title :color="color">{{ text }}</v-list-item-title>
-						</v-list-item-content>
-
-					</v-list-item>
-				</v-list>
-			</div>
-
 		</div>
 	</v-navigation-drawer>
 </template>
@@ -58,10 +26,11 @@ export default {
 	name: 'Sidebar',
 	data: () => ({
 		linksAdmin: [
-			['mdi-microsoft-windows', 'Dashboard', '#C51162', 'dashboard'],
-			['mdi-account-cog', 'GestionCompte', '#9C27B0', 'accounts'],
-			['mdi-chart-bar', 'Suivi', '#60722B', 'indexnutrition'],
-			['mdi-message', 'Messages', '#607D8B', 'indexMsg'],
+			['mdi-microsoft-windows', 'Accueil', '#C51162', 'dashboard'],
+			['mdi-clipboard-list-outline', 'Fonction', '#9C27B0', 'indexfonction'],
+			['mdi-gamepad', 'Dettes', '#60722B', 'indexdette'],
+			['mdi-alert', 'Absences', 'red', 'indexabsence'],
+			['mdi-format-align-center', 'Agents', '#9C27B0', 'accounts'],
 		],
 
 		linksNutritionniste: [
@@ -74,7 +43,6 @@ export default {
 			['mdi-clipboard-list-outline', 'Enfants', '#9C27B0', 'indexenfant'],
 			['mdi-message', 'Messages', '#607D8B', 'indexMsg'],
 		],
-
 
 	}),
 	methods: {

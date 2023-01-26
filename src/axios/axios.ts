@@ -1,6 +1,6 @@
 import axios from 'axios';
 const axiosClient = axios.create({
-	baseURL: 'http://localhost/bcz/public/'
+	baseURL: 'http://localhost/remuneration/public/'
 })
 
 axiosClient.interceptors.request.use(config => {
