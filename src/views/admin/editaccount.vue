@@ -7,10 +7,10 @@
 			<v-text-field v-model="lastname" label="Prénom" required :counter="255"> </v-text-field>
 			<v-text-field v-model="email" label="Adresse email" required :counter="255"> </v-text-field>
 			<v-text-field v-model="password" label="Mot de passe par defaut" required :counter="255"> </v-text-field>
-			<v-select name="" v-model="scope" :items="items_scope" item-text="title" label="Type d'utilisateur"
-				item-value="scope">
+			<v-select name="" v-model="idFonction" :items="itemsFonctions" item-text="nomFonction"
+				label="Choisir fonction" item-value="idFonction">
 			</v-select>
-			
+
 			<v-alert :type="typeAlert" v-if="msgAlert" class="mb-4">
 				{{ msgAlert }}
 			</v-alert>
@@ -30,6 +30,8 @@ export default {
 		firstname: '',
 		lastname: '',
 		email: '',
+		idFonction:'',
+		itemsFonctions:[],
 		password: '',
 		created_at: '',
 		scope: '',
@@ -47,20 +49,40 @@ export default {
 		],
 		items_scope: [
 			{
-				scope: 'nutritionniste',
-				title: 'Nutritionniste'
+				scope: 'gestionnaire',
+				title: 'Gestionnaire'
+			},
+			{
+				scope: 'caissier',
+				title: 'Caissier'
 			},
 			{
 				scope: 'receptionniste',
 				title: 'Réceptionniste'
 			},
+			{
+				scope: 'ouvrier',
+				title: 'Ouvrier'
+			},
+			{
+				scope: 'informaticien',
+				title: 'Informaticien'
+			},
 		]
 	}),
 	methods: {
-		
+
 		changetypefonction(type) {
 			this.typeAlert = ''
 			this.msgAlert = ''
+		},
+		async getFonctions() {
+			try {
+				const response = await axios.post('fonction/getAllfonctions')
+				this.itemsFonctions = response.data;
+			} catch (e) {
+				console.log(e)
+			}
 		},
 		async editMethod() {
 			this.changetypefonction('')
@@ -113,6 +135,7 @@ export default {
 	},
 	beforeMount() {
 		this.getUserInfo()
+		this.getFonctions()
 	},
 }
 </script>

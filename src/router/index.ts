@@ -35,7 +35,7 @@ const routes: Array<RouteConfig> = [
       },
       {
         path: 'listusers',
-        name: 'listusers',
+        name: 'accounts',
         component: () => import('../views/admin/listusers.vue'),
         props: true
       },
@@ -201,6 +201,37 @@ const routes: Array<RouteConfig> = [
       }
     ]
   },
+  {
+    path: 'index-salaire',
+    name: 'indexsalaire',
+    component: () => import('../views/salaire/index-salaire.vue'),
+    children: [
+      {
+        path: 'edit-salaire/:id',
+        name: 'editsalaire',
+        component: () => import('../views/salaire/edit-salaire.vue'), 
+        props: true,
+      }, 
+      {
+        path: 'new-salaire',
+        name: 'newsalaire',
+        component: () => import('../views/salaire/new-salaire.vue'),
+        props: true,
+      },
+      {
+        path : 'list-salaire',
+        name :'indexsalaire', 
+        component: () => import('../views/salaire/liste-salaire.vue'),
+        props : true
+      },
+      {
+        path : 'print-salaire/:id',
+        name :'printsalaire', 
+        component: () => import('../views/salaire/print-salaire.vue'),
+        props : true
+      }
+    ]
+  },
 
   {
     path: 'index-nutrition',
@@ -281,6 +312,8 @@ const routes: Array<RouteConfig> = [
       },
     ]
   },
+
+  
 
 
 ]

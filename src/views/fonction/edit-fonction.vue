@@ -52,12 +52,11 @@ export default {
 
 			try {
 				const formData = new FormData()
+				formData.append('idAgent', this.idAgent)
 				formData.append('idFonction', this.idFonction)
-				formData.append('nomFonction', this.nom)
-				formData.append('baremeSalaire', this.postnom)
-				const dateObj = new Date();
-				const currentDate = ":" + dateObj.getHours() + ':' + dateObj.getMinutes() + ':' + dateObj.getSeconds();
-				formData.append('dateEnregistrement', this.dateEnregistrement + currentDate)
+				formData.append('nomFonction', this.nomFonction)
+				formData.append('baremeSalaire', this.baremeSalaire)
+				
 				const response = await axios.post('fonction/editfonction/' + this.idFonction, formData)
 				if ((response.data.errorstate) == true) {
 					this.typeAlert = 'error'

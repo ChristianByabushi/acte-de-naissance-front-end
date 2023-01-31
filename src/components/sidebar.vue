@@ -27,8 +27,9 @@ export default {
 	data: () => ({
 		linksAdmin: [
 			['mdi-microsoft-windows', 'Accueil', '#C51162', 'dashboard'],
-			['mdi-clipboard-list-outline', 'Fonction', '#9C27B0', 'indexfonction'],
-			['mdi-gamepad', 'Dettes', '#60722B', 'indexdette'],
+			['mdi-currency-eur', 'Salaire', '#53C7BF', 'indexsalaire'],
+			['mdi-bank', 'Fonction', '#9C27B0', 'indexfonction'],
+			['mdi-gift', 'Dettes', '#60722B', 'indexdette'],
 			['mdi-alert', 'Absences', 'red', 'indexabsence'],
 			['mdi-format-align-center', 'Agents', '#9C27B0', 'accounts'],
 		],

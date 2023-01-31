@@ -7,10 +7,10 @@
 					<v-text-field v-model="lastname" label="Prénom" required :counter="255"> </v-text-field>
 					<v-text-field v-model="email" label="Adresse email" required :counter="255"> </v-text-field>
 					<v-text-field v-model="password" label="Mot de passe par defaut" required :counter="255">
-					</v-text-field>
-					<v-select name="" v-model="scope" :items="items_scope" item-text="title" label="Type d'utilisateur"
-						item-value="scope">
-					</v-select>
+					</v-text-field> 
+					<v-select name="" v-model="idFonction" :items="itemsFonctions" item-text="nomFonction" label="Choisir fonction"
+						item-value="idFonction">
+					</v-select> 
 					<v-alert :type="typeAlert" v-if="msgAlert" class="mb-4">
 						{{ msgAlert }}
 					</v-alert>
@@ -30,11 +30,13 @@ export default {
 	data: () => ({
 		firstname: '',
 		lastname: '',
+		itemsFonctions :[],
 		email: '',
 		password: '',
 		created_at: '',
 		scope: '',
 		msgAlert: '',
+		idFonction :'',
 		items_scope: [
 			{
 				scope: 'nutritionniste',
@@ -51,6 +53,14 @@ export default {
 			this.typeAlert = ''
 			this.msgAlert = ''
 		},
+		async getFonctions() {
+			try {
+				const response = await axios.post('fonction/getAllfonctions')
+				this.itemsFonctions = response.data;
+			} catch (e) {
+				console.log(e)
+			}
+		},
 		async addMethod() {
 			this.changetypefonction('')
 			if (((String(this.password).length) < 8) || ((String(this.newpassword).length) < 8)) {
@@ -58,16 +68,17 @@ export default {
 				this.msgAlert = " Le mot de passe doit contenir au minimum 8 caractères"
 				return
 			}
-			if (this.scope == '') {
+			if (this.idFonction == '') {
 				this.typeAlert = "error"
 				this.msgAlert = "Veuillez choisir d'abord le type d'utilisateur"
 				return
 			}
-			try {
+			try { 
 				const formData = new FormData()
 				formData.append('firstname', this.firstname)
 				formData.append('lastname', this.lastname)
 				formData.append('password', this.password)
+				formData.append('idFonction', this.idFonction)
 				formData.append('password_confirm', this.password)
 				formData.append('email', this.email)
 				formData.append('scope', this.scope)
@@ -87,6 +98,10 @@ export default {
 			}
 		}
 	},
+
+	beforeMount(){
+		this.getFonctions()
+	}
 }
 </script>
 

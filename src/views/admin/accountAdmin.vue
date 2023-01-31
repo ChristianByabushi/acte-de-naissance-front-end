@@ -262,10 +262,9 @@ export default {
 				return false
 			}
 		},
-
 		async editAccount() {
 			if (this.verifyFormEdit() == false) {
-				return
+				returnlastname
 			};
 			try {
 				const formData = new FormData()
@@ -275,11 +274,10 @@ export default {
 				formData.append('new_email', this.email)
 				formData.append('email', this.userInfo.email)
 				formData.append('idUser', this.userInfo.id)
-				const response = await axios.post('user/editAccount', formData)
+				const response = await axios.post('user/editAccountUser', formData)
 				this.typeAlert = 'primary'
-				this.msgAlert = 'Compte mise à jour avec succès'
-				if (this.$route.path !== '/login')
-					this.$router.push('/login')
+				this.msgAlert = 'Compte mise à jour du compte avec succès'
+				alert(this.msgAlert)
 			} catch (e) {
 				console.log(e)
 				this.msgAlert = 'Erreur survenue, rassurez vous que le mot de passe est correct'

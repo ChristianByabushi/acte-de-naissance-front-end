@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h3 dense>Gestion des absences </h3>
+		<h3 dense>Gestion des salaires </h3>
 		<v-card>
 			<div v-for="(menu, index) in menus" :key="index" class="menu">
 				<v-btn class="mb-2 ml-4 mt-2" link :to="{ name: menu.link }">{{ menu.title }}
@@ -23,9 +23,9 @@ export default {
 	data() {
 		return {
 			menus: [
-				{ title: "Liste des absences", icon: 'mdi-account', link: "indexabsence" },
-				{ title: "Ajouter", icon: "mdi-delete", link: "newabsence" },
-				{ title: "Editer", icon: "mdi-pencil", link: "editabsence" },
+				{ title: "Liste des salaires", icon: 'mdi-account', link: "indexsalaire" },
+				{ title: "Ajouter", icon: "mdi-delete", link: "newsalaire" },
+				{ title: "Editer", icon: "mdi-pencil", link: "editsalaire" },
 			],
 		}
 	},

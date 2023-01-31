@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h5>Enregistrement d'une absence</h5>
+		<h5>Enregistrement Salaire</h5>
 		<form @submit.prevent="addMethod()" method="post">
 			<v-row>
 				<v-col lg="6" cols="12">
@@ -8,13 +8,13 @@
 						item-value="id">
 					</v-select> 
 				
-					<v-text-field v-model="motif" label="motif" required> </v-text-field>
+					<v-text-field v-model="motif" label="description" required> </v-text-field>
 				</v-col>
 				<v-col lg="6" cols="12">
-					<v-text-field v-model="coutAbsence" label="coutAbsence ($)" required> </v-text-field>
+					<v-text-field v-model="indemnites" label="indemnites ($)" required> </v-text-field>
+					<v-text-field v-model="autresReduction" label="autresReduction ($)" required> </v-text-field>
 
-					<v-text-field type="date" v-model="dateAbsence" label="Jour de l'appel" required> </v-text-field>
-
+					<v-text-field type="date" v-model="datePayement" label="Jour du payement" required> </v-text-field>
 				</v-col>
 			</v-row>
 
@@ -35,10 +35,11 @@ export default {
 	name: "newacte",
 	data: () => ({
 		idUtilisateur: "",
-		coutAbsence: "",
+		indemnites: "",
+		autresReduction: "",
 		motif: "",
 		itemsUsers: [],
-		dateAbsence: "",
+		datePayement: "",
 		dateEnregistrement: new Date().toJSON().slice(0, 10).replace(/-/g, '/'),
 		msgAlert: '',
 	}),
@@ -50,18 +51,18 @@ export default {
 		'userInfo'
 	]),
 	methods: {
-		changetypeabsence() {
+		changetypeSalaire() {
 			this.typeAlert = ''
 			this.msgAlert = ''
 		},
 		initializeFields() {
-			this.coutAbsence = "",
+			this.indemnites = "",
 				this.motif = ""
 		},
 
 		async addMethod() {
-			this.changetypeabsence()
-			if ((this.nomabsence == '') || (this.baremeabsence == '')) {
+			this.changetypeSalaire()
+			if ((this.nomSalaire == '') || (this.baremeSalaire == '')) {
 				this.typeAlert = "error"
 				this.msgAlert = "Rassurez d'avoir entré toutes les identités (le nomet le post-nom) !"
 				return
@@ -71,13 +72,14 @@ export default {
 				const currentDate = ":" + dateObj.getHours() + ':' + dateObj.getMinutes() + ':' + dateObj.getSeconds();
 				const formData = new FormData()
 				
-				formData.append('coutAbsence', this.coutAbsence)
+				formData.append('indemnites', this.indemnites)
 				formData.append('motif', this.motif)
-				formData.append('dateAbsence', this.dateEnregistrement)
+				formData.append('datePayement', this.datePayement)
+				formData.append('autresReduction', this.autresReduction)
 				formData.append('idUtilisateur', this.idUtilisateur)
 				formData.append('idAgent', this.idAgent)
 
-				const response = await axios.post('absence/addabsence', formData)
+				const response = await axios.post('salaire/addsalaire', formData)
 
 				if ((response.data.errorstate) == true) {
 					console.log(2)
@@ -87,7 +89,7 @@ export default {
 					return
 				} 
 
-				this.msgAlert = 'absence enregistrée avec succés'
+				this.msgAlert = 'Salaire enregistrée avec succés'
 				this.typeAlert = 'success'
 				this.initializeFields()
 			} catch (e) {

@@ -2,7 +2,7 @@
 <template>
 	<v-app-bar absolute app elevation="4" color="grey lighten-2">
 		<v-app-bar-nav-icon @click="handDrawer()"></v-app-bar-nav-icon>
-		<v-toolbar-title >Kamanuga Hotel</v-toolbar-title>
+		<v-toolbar-title >Kamanunga Hotel</v-toolbar-title>
 		<v-col lg="6" cols="5">
 			<v-spacer></v-spacer>
 			

@@ -41,38 +41,61 @@ export default {
 			{ text: 'Nom', value: 'firstname' },
 			{ text: 'Prénom', value: 'lastname' },
 			{ text: 'email', value: 'email' },
+			{ text: 'Scope', value: 'scope' },
 			{ text: 'Date de creattion', value: 'created_at' },
 			{ text: 'actions', value: 'actions' },
 		],
 		header_usersData: [],
-		scope: "decl",
+		scope: "tous",
 		items_scope: [
 			{
-				scope: 'nutritionniste',
-				title: 'Nutritionniste'
+				scope: "tous",
+				title: 'Tous'
 			},
-			
+			{
+				scope: 'gestionnaire',
+				title: 'Gestionnaire'
+			},
+			{
+				scope: 'caissier',
+				title: 'Caissier'
+			},
 			{
 				scope: 'receptionniste',
 				title: 'Réceptionniste'
+			},
+			{
+				scope: 'ouvrier',
+				title: 'Ouvrier'
+			},
+			{
+				scope: 'informaticien',
+				title: 'Informaticien'
 			},
 		]
 
 	}),
 	methods: {
 		async get_users() {
-			let id = String(this.scope)
-			if (id == null)
-				id = "receptionniste"
+			let scope = String(this.scope)
+			if (scope == null)
+				scope = ""
 			try {
-				const response = await axios.post("user/getAllUsers/" + id)
-				this.header_usersData = response.data 
+				const response = await axios.post(`user/getAllUsers/${this.scope}`)
+				this.header_usersData = response.data
 				console(response.data)
 			} catch (e) {
 				console.log(e)
 			}
 		},
-
+		async getFonctions() {
+			try {
+				const response = await axios.post('fonction/getAllfonctions')
+				this.itemsFonctions = response.data;
+			} catch (e) {
+				console.log(e)
+			}
+		},
 		async deleteUser(item) {
 			let id = item.id
 			if (confirm("voulez-vous vraiment supprimer ce compte")) {

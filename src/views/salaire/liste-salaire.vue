@@ -4,9 +4,9 @@
 			<div v-if="printData">
 				<img id="printLogo" src="@/assets/logosidebar.png" alt="error" />
 				<h6>Kamanunga Hotel</h6>
-				<h6>Absences</h6>
+				<h6>Salaire</h6>
 				<h6>Date {{ dateReport }}</h6>
-			</div> 
+			</div>
 			<div v-else>
 				<form>
 					<div class="d-flex">
@@ -19,31 +19,50 @@
 				</form>
 			</div>
 			<v-simple-table>
-				<caption style="text-align:center"> Liste des Absences</caption>
+				<caption style="text-align:center"> Salaire mensuel</caption>
 				<thead>
 					<tr>
-						<th>idabsence</th>
+						<th>idSalaire</th>
 						<th>nom</th>
-						<th>post-nom</th>
-						<th>coutAbsence</th> 
-						<th>NbreAbsences</th> 
+						<th>fonction</th>
+						<th>baremeSalaire</th>
+						<th>indemnites</th>
+						<th>AutresRed</th>
+						<th>coutDette</th>
+						<th>coutAbsence</th>
+						<th>SalaireNet</th>
+						<th>date</th>
+						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="(item, index) in onSearchNom" :key="item.idAbsence">
-						<td>{{ item.idAbsence }}</td>
-						<td>{{ item.firstname }}</td>
-						<td>{{ item.lastname }}</td>
-						<td>{{ item.coutTotalCoutAbsence }}</td>
-						<td>{{ item.nbAbscences }}</td>
+					<tr v-for="(item, index) in onSearchNom" :key="item.idSalaire">
+						<td>{{ item.idSalaire }}</td>
+						<td>{{ item.nom }}</td>
+						<td>{{ item.nomFonction }}</td>
+						<td>{{ item.baremeSalaire }}$</td>
+						<td>{{ item.indemnites }}$</td>
+						<td>{{ item.autresReduction }}$</td>
+						<td>{{ item.userMontantDette }}$</td>
+						<td>{{ item.userCoutAbsence }}$</td>
+						<td class="formSalaireNet">{{ convertInfoFloat(item.baremeSalaire)+
+						(convertInfoFloat(item.indemnites))
+						- convertInfoFloat(item.autresReduction) - convertInfoFloat(item.userMontantDette) -
+						convertInfoFloat(item.userCoutAbsence) }} $</td>
+						<td>{{ item.datePayement }}</td>
 						<td>
 							<v-btn x-small class="btnAction" color="info" link
-								:to="{ name: 'editabsence', params: { id: item.idAbsence } }">
-								<v-icon x-small color="purple"> mdi-pencil
+								:to="{ name: 'editsalaire', params: { id: item.idSalaire } }">
+								<v-icon x-small color="indingo"> mdi-pencil
 								</v-icon>
 							</v-btn>
-							<v-btn x-small class="btnAction" color="info" @click="deleteabsence(item.idAbsence)">
-								<v-icon x-small color="purple"> mdi-delete
+							<v-btn x-small class="btnAction " color="danger" @click="deleteabsence(item.idSalaire)">
+								<v-icon x-small color="red"> mdi-delete
+								</v-icon>
+							</v-btn>
+							<v-btn x-small class="btnAction" color="success" link
+								:to="{ name: 'printsalaire', params: { id: item.idSalaire } }">
+								<v-icon x-small color="indingo"> mdi-eye
 								</v-icon>
 							</v-btn>
 						</td>
@@ -65,19 +84,19 @@ import axios from 'axios'
 export default {
 	name: "listeabsence",
 	data: () => ({
-		itemsAbsences: [],
+		itemsSalaire: [],
 		dateReport: new Date().toJSON().slice(0, 10).replace(/-/g, '-'),
 		printData: false,
 		seekname: "",
 		firstname: "",
-		dateabsence: "", 
-		nbAbscences :""
+		dateabsence: "",
+		nbAbscences: ""
 	}),
 	computed: {
 		onSearchNom() {
 			let seek = this.seekname
-			return this.itemsAbsences.filter(item => {
-				return item.firstname.toLowerCase().indexOf(seek.toLowerCase()) > -1
+			return this.itemsSalaire.filter(item => {
+				return item.nom.toLowerCase().indexOf(seek.toLowerCase()) > -1
 			})
 		},
 	},
@@ -89,20 +108,25 @@ export default {
 		unenablePrint() {
 			this.printData = false
 		},
+		convertInfoFloat(value) {
+
+			return  parseFloat(value)
+		},
 		printMethode() {
 			html2pdf(document.getElementById("printListabsence"), {
 				margin: 4,
-				filename: "listeabsence-" + this.dateReport,
+				filename: "listeSalaire-" + this.dateReport,
 				jsPDF: {
-					format: 'a4',
+					format: 'a3',
 					orientation: 'portrait'
 				},
 			});
 		},
-		async getAbsences() {
+		async getSalaire() {
 			try {
-				const response = await axios.post("absence/getAllAbsences/"+ this.dateReport)
-				this.itemsAbsences = response.data 
+				const response = await axios.post("salaire/getAllsalaires/" + this.dateReport)
+				this.itemsSalaire = response.data
+				console.log(this.itemsSalaire)
 			} catch (e) {
 				console.log(e)
 			}
@@ -110,8 +134,8 @@ export default {
 		async deleteabsence(id) {
 			if (confirm("Voulez vous supprimer cet absence ?"))
 				try {
-					const response = await axios.post("absence/deleteabsence/" + id)
-					this.itemsAbsences = response.data
+					const response = await axios.post("salaire/deletesalaire/" + id)
+					this.itemsSalaire = response.data
 				} catch (e) {
 					console.log(e)
 				}
@@ -123,7 +147,7 @@ export default {
 		return currentDate
 	},
 	beforeMount() {
-		this.getAbsences()
+		this.getSalaire()
 	},
 }
 </script>
@@ -146,6 +170,12 @@ input[type=text]:focus {
 #div {
 	display: flex;
 	margin-left: 2cm;
+}
+
+.formSalaireNet {
+	color: rgb(255, 255, 255);
+	font-size: x-large;
+	background-color: rgb(91, 87, 96);
 }
 
 #printLogo {

@@ -1,17 +1,17 @@
 <template>
 	<div>
-		<v-subheader class="d-flex justify-space-between align-center">
-			<h3>Gestion des comptes</h3>
-		</v-subheader>
-		<v-alert dense type="info" color="#757575">
-			Cette partie contient toutes fonctions sur les statistiques des actes dans la commune de bagira
-		</v-alert>
+		<v-card class="mb-2">
+			<v-subheader class="d-flex justify-space-between align-center">
+				<h3>Gestion des comptes</h3>
+			</v-subheader>
+		</v-card>
+
 		<v-card>
 			<div v-for="(menu, index) in menus" :key="index" class="menu">
 				<v-btn class="mb-2 ml-4 mt-2" link :to="{ name: menu.link }">{{ menu.title }}
 				</v-btn>
-			</div> 
-		</v-card> 
+			</div>
+		</v-card>
 		<v-card class="mt-4 py-8 px-6" fluid>
 			<router-view></router-view>
 		</v-card>
@@ -31,7 +31,7 @@ export default {
 	data() {
 		return {
 			menus: [
-				{ title: "Liste des utilisateurs", icon: 'mdi-account', link: "listusers" },
+				{ title: "Liste des utilisateurs", icon: 'mdi-account', link: "accounts" },
 				{ title: "ajouter", icon: "mdi-delete", link: "addaccount" },
 				{ title: "modifier", icon: "mdi-delete", link: "editaccount" },
 			],

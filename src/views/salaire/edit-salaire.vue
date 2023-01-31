@@ -1,16 +1,20 @@
 <template>
 	<div>
-		<h5>identifiant de la dette : <span>({{ idDette }})</span></h5>
+		<h5>identifiant du Salaire : <span>({{ idSalaire }})</span></h5>
 		<form @submit.prevent="editMethod()" method="post">
 			<v-row>
 				<v-col lg="6" cols="12">
-					<v-text-field v-model="raison" label="Raison" required> </v-text-field>
+					<v-select name="" v-model="idUtilisateur" :items="itemsUsers" item-text="nom" label="Agent"
+						item-value="id">
+					</v-select> 
+				
+					<v-text-field v-model="motif" label="description" required> </v-text-field>
 				</v-col>
 				<v-col lg="6" cols="12">
-					<v-text-field v-model="montantDette" label="montantDette ($)" required> </v-text-field>
+					<v-text-field v-model="indemnites" label="indemnites ($)" required> </v-text-field>
+					<v-text-field v-model="autresReduction" label="autresReduction ($)" required> </v-text-field>
 
-					<v-text-field type="date" v-model="dateDette" label="date d'emprunt" required> </v-text-field>
-
+					<v-text-field type="date" v-model="datePayement" label="Jour du payement" required> </v-text-field>
 				</v-col>
 			</v-row>
 			<v-alert :type="typeAlert" v-if="msgAlert" class="mb-4">
@@ -27,23 +31,25 @@
 import axios from 'axios'
 import router from '@/router';
 export default {
-	name: "editfonctioncomponent",
+	name: "editsalairecomponent",
 	data: () => ({
 		idUtilisateur: "",
-		montantDette: "",
-		raison: "",
+		idSalaire :"",
+		indemnites: "",
+		autresReduction: "",
+		motif: "",
 		itemsUsers: [],
-		dateDette: "",
+		datePayement: "",
 		dateEnregistrement: new Date().toJSON().slice(0, 10).replace(/-/g, '/'),
 		msgAlert: '',
 	}),
 	methods: {
-		changetypefonction() {
+		changetypesalaire() {
 			this.typeAlert = ''
 			this.msgAlert = ''
 		},
 		initializeFields() {
-			this.montantDette = "",
+			this.montantSalaire = "",
 				this.raison = ""
 		},
 		async getlisteUsers() {
@@ -55,7 +61,7 @@ export default {
 			}
 		},
 		async editMethod() {
-			this.changetypefonction()
+			this.changetypesalaire()
 			if ((this.nom == '') || (this.postnom == '') || (this.prenom == "")) {
 				this.typeAlert = "error"
 				this.msgAlert = "Rassurez d'avoir entrées toutes les coordonnées !"
@@ -66,21 +72,21 @@ export default {
 			try {
 				const formData = new FormData()
 
-				formData.append('montantDette', this.montantDette)
-				formData.append('raison', this.raison)
-				formData.append('montantDette', this.montantDette)
-				formData.append('dateDette', this.dateEnregistrement)
+				formData.append('indemnites', this.indemnites)
+				formData.append('motif', this.motif)
+				formData.append('datePayement', this.datePayement)
+				formData.append('autresReduction', this.autresReduction)
 				formData.append('idUtilisateur', this.idUtilisateur)
 				formData.append('idAgent', this.idAgent)
 
-				const response = await axios.post('dette/editdette', formData)
+				const response = await axios.post('Salaire/editSalaire', formData)
 				if ((response.data.errorstate) == true) {
 					this.typeAlert = 'error'
 					this.msgAlert = response.data.error
 					console.log(response.data.error)
 					return
 				}
-				this.msgAlert = "Dette editée avec succés"
+				this.msgAlert = "Salaire editée avec succés"
 				this.typeAlert = 'success'
 				this.initializeFields()
 
@@ -88,14 +94,14 @@ export default {
 			}
 		},
 
-		async getinfofonction() {
+		async getinfosalaire() {
 			let paramId = router.currentRoute.params.id
-			console.log(router.currentRoute.params.id)
 			if (paramId != null) {
-				const response = await axios.post('fonction/getfonctioninfo/' + paramId)
-				this.montantDette = response.data.montantDette;
-				this.raison = response.data.raison;
-				this.idDette = paramId
+				const response = await axios.post('salaire/getsalaireinfo/' + paramId)
+				this.autresReduction = response.data.autresReduction;
+				this.indemnites = response.data.indemnites;
+				this.datePayement = response.data.datePayement;
+				this.idSalaire = paramId
 			}
 		},
 		getCurrentTime() {
@@ -105,7 +111,7 @@ export default {
 		},
 	},
 	beforeMount() {
-		this.getinfofonction();
+		this.getinfosalaire();
 		this.getlisteUsers
 	}
 }
